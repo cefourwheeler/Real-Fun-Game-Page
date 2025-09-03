@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Game WebPage</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            color: #232323;
+        }
+        .marquee-container {
+            width: 100vw;
+            overflow: hidden;
+            background: linear-gradient(90deg, #232323 60%, #444 100%);
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 8px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            height: 36px;
+        }
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 18s linear 1;
+            animation-fill-mode: forwards;
+        }
+        .marquee.stopped {
+            display: none;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100vw);}
+            100% { transform: translateX(-100%);}
+        }
+        .top-nav-section {
+            width: 100vw;
+            background: rgba(255,255,255,0.97);
+            border-bottom: 4px solid #232323;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            display: flex;
+            align-items: center;
+            padding: 0.5em 2em;
+            position: fixed;
+            top: 40px; /* below marquee */
+            left: 0;
+            z-index: 10;
+            height: 70px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            z-index: 2;
+            margin-left: 24px;
+        }
+        .dropbtn {
+            background: linear-gradient(90deg, #232323 60%, #444 100%);
+            color: #fff;
+            padding: 12px 28px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .dropbtn:hover, .dropbtn:focus {
+            background: linear-gradient(90deg, #444 60%, #232323 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 180px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+            border-radius: 10px;
+            z-index: 20;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .dropdown-content a {
+            color: #232323;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .dropdown-content a:hover {
+            background-color: #232323;
+            color: #fff;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .nav-header {
+            font-size: 2.1em;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            letter-spacing: 2px;
+            color: #232323;
+            font-weight: 700;
+            text-align: center;
+            margin: 0 auto;
+            flex: 1;
+            pointer-events: none;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        .moonlight-greatsword-header {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            z-index: 30;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: flex-start;
+        }
+        .moonlight-greatsword-header:hover {
+            transform: scale(1.10) rotate(-6deg);
+            filter: drop-shadow(0 2px 12px #b0e0ff);
+        }
+        .moonlight-dropdown {
+            display: none;
+            position: absolute;
+            left: 60px;
+            top: 0;
+            background: #f8f9fa;
+            border: 1.5px solid #3ec6ff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(62,198,255,0.10);
+            padding: 10px 16px;
+            font-size: 1em;
+            color: #232323;
+            min-width: 180px;
+            z-index: 40;
+            transition: opacity 0.2s;
+        }
+        .moonlight-greatsword-header.active .moonlight-dropdown {
+            display: block;
+        }
+        .page-section {
+            display: none;
+            width: 100vw;
+            min-height: 100vh;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 170px; /* space for nav + marquee */
+            box-sizing: border-box;
+            animation: fadeIn 0.5s;
+        }
+        .page-section.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: none;}
+        }
+        #home {
+            background: transparent;
+        }
+        #page2, #page3, #page4, #page5 {
+            background: #f8f9fa;
+        }
+        .header {
+            display: none;
+        }
+        .summary {
+            max-width: 650px;
+            margin: 0 auto 28px auto;
+            padding: 22px 32px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 14px;
+            color: #232323;
+            font-size: 1.18em;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+        }
+        .image-placeholder {
+            width: 340px;
+            height: 210px;
+            border: 4px solid #232323;
+            border-radius: 14px;
+            margin: 32px 0 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e9e9e9;
+            overflow: hidden;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+            position: relative;
+        }
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .large-textbox {
+            width: 82vw;
+            max-width: 720px;
+            min-height: 160px;
+            margin: 36px 0 0 0;
+            padding: 28px 32px;
+            border: 2.5px solid #232323;
+            border-radius: 16px;
+            background: #fff;
+            font-size: 1.22em;
+            color: #232323;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            letter-spacing: 0.01em;
+        }
+        @media (max-width: 900px) {
+            .nav-header {
+                font-size: 1.3em;
+            }
+            .summary {
+                font-size: 1em;
+                padding: 14px 10px;
+            }
+            .page-section {
+                padding-top: 140px;
+            }
+            .top-nav-section {
+                flex-direction: column;
+                gap: 8px;
+                height: auto;
+            }
+            .nav-header {
+                position: static;
+                transform: none;
+                margin: 0;
+            }
+            .image-placeholder {
+                width: 95vw;
+                height: 150px;
+            }
+            .large-textbox {
+                width: 97vw;
+                padding: 16px 8px;
+                font-size: 1em;
+            }
+            .marquee-container {
+                font-size: 1em;
+                padding: 6px 0;
+                height: 28px;
+            }
+            .moonlight-greatsword-header {
+                right: 12px;
+                top: 0;
+            }
+            .moonlight-dropdown {
+                left: 44px;
+                min-width: 120px;
+                font-size: 0.95em;
+            }
+        }
+    </style>
+    <script>
+        // Map page IDs to header text
+        const pageHeaders = {
+            home: "Welcome to my video game web page",
+            page2: "Dark Souls 3",
+            page3: "Page 3",
+            page4: "Page 4",
+            page5: "Page 5"
+        };
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(function(section) {
+                section.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            if(pageId === 'home') {
+                document.body.style.background = "url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed";
+                document.body.style.backgroundSize = "cover";
+            } else {
+                document.body.style.background = "#f8f9fa";
+                document.body.style.backgroundSize = "auto";
+            }
+            document.getElementById('nav-header').textContent = pageHeaders[pageId] || "";
+        }
+        window.onload = function() {
+            showPage('home');
+            // Marquee stop after one scroll
+            var marquee = document.querySelector('.marquee');
+            marquee.addEventListener('animationend', function() {
+                marquee.classList.add('stopped');
+            });
+        };
+        // Moonlight Greatsword dropdown logic
+        function toggleMoonlightDropdown(event) {
+            event.stopPropagation();
+            var sword = document.getElementById('moonlightSword');
+            sword.classList.toggle('active');
+        }
+        document.addEventListener('click', function(e) {
+            var sword = document.getElementById('moonlightSword');
+            if (sword) sword.classList.remove('active');
+        });
+    </script>
+</head>
+<body>
+    <div class="marquee-container">
+        <span class="marquee">Welcome to my Fun Game Page! &nbsp;|&nbsp; Explore my favorite games and read my thoughts on each one! &nbsp;|&nbsp; Enjoy your stay!</span>
+    </div>
+    <div class="top-nav-section">
+        <div class="dropdown">
+            <button class="dropbtn">Pages ▼</button>
+            <div class="dropdown-content">
+                <a onclick="showPage('home')">Home</a>
+                <a onclick="showPage('page2')">Dark Souls 3</a>
+                <a onclick="showPage('page3')">Page 3</a>
+                <a onclick="showPage('page4')">Page 4</a>
+                <a onclick="showPage('page5')">Page 5</a>
+            </div>
+        </div>
+        <div id="nav-header" class="nav-header">Welcome to the Fun Game Page!</div>
+    </div>
+    <div id="home" class="page-section">
+        <div class="header"></div>
+        <div class="summary">
+            This webpage is about games I like. You can find multiple pages dedicated to different games with an essay style summary of the game and why I like it.
+        </div>
+        <div class="interactive-tag" onclick="alert('You found the secret tag! Try exploring the other pages for more surprises!')" style="margin-top:8px; display:inline-block; cursor:pointer; background:linear-gradient(90deg,#3ec6ff,#b0e0ff); color:#232323; font-weight:bold; border-radius:10px; padding:2px 8px; font-size:0.7em; box-shadow:0 1px 3px rgba(62,198,255,0.10); opacity:0.5; transition:opacity 0.2s,transform 0.2s; position:relative;">
+            <span role="img" aria-label="sparkle">✨</span>
+        </div>
+    </div>
+    <div id="page2" class="page-section" style="position:relative;">
+        <div class="moonlight-greatsword-header" id="moonlightSword" title="Moonlight Greatsword" onclick="toggleMoonlightDropdown(event)">
+            <svg width="54" height="54" viewBox="0 0 54 54" fill="none">
+                <rect x="25" y="7" width="4" height="30" rx="2" fill="url(#bladeGradient)" stroke="#3ec6ff" stroke-width="1.5"/>
+                <path d="M19 36 Q27 44 35 36" stroke="#b0e0ff" stroke-width="3.5" fill="none"/>
+                <path d="M19 36 Q27 41 35 36" stroke="#3ec6ff" stroke-width="2" fill="none"/>
+                <rect x="23" y="37" width="8" height="4" rx="2" fill="#444" stroke="#232323" stroke-width="1"/>
+                <circle cx="27" cy="46" r="3" fill="#b0e0ff" stroke="#3ec6ff" stroke-width="1"/>
+                <defs>
+                    <linearGradient id="bladeGradient" x1="27" y1="7" x2="27" y2="37" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#b0e0ff"/>
+                        <stop offset="0.5" stop-color="#3ec6ff"/>
+                        <stop offset="1" stop-color="#1e6fa7"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="moonlight-dropdown" id="moonlightDropdown">
+                <strong>Moonlight Greatsword</strong><br>
+                The Moonlight Greatsword is a legendary weapon that has appeared in nearly every FromSoftware game, known for its iconic glowing blade and powerful magic attacks. [Add more history here!]
+            </div>
+        </div>
+        <div class="image-placeholder">
+            <img src="https://static1.dualshockersimages.com/wordpress/wp-content/uploads/2022/10/Dark-Souls-3-Ending.jpg" alt="Dark Souls 3">
+        </div>
+        <p class="large-textbox">
+            Dark Souls 3 is a masterclass in atmospheric world-building and challenging gameplay. Its interconnected environments, haunting soundtrack, and rewarding combat make every victory feel earned. The sense of discovery and the thrill of overcoming seemingly insurmountable odds are what keep me coming back to this game.
+        </p>
+    </div>
+    <div id="page3" class="page-section">
+        <div class="header"></div>
+        <div class="image-placeholder">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Page 3 Game">
+        </div>
+        <p class="large-textbox">
+            [Write your summary or essay about this game here.]
+        </p>
+    </div>
+    <div id="page4" class="page-section">
+        <div class="header"></div>
+        <div class="image-placeholder">
+            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" alt="Page 4 Game">
+        </div>
+        <p class="large-textbox">
+            [Write your summary or essay about this game here.]
+        </p>
+    </div>
+    <div id="page5" class="page-section">
+        <div class="header"></div>
+        <div class="image-placeholder">
+            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" alt="Page 5 Game">
+        </div>
+        <p class="large-textbox">
+            [Write your summary or essay about this game here.]
+        </p>
+    </div>
+</body>
+</html>
