@@ -133,10 +133,21 @@
             transition: transform 0.2s;
             display: flex;
             align-items: flex-start;
+            background: none;
+            padding: 0;
         }
-        .moonlight-greatsword-header:hover {
-            transform: scale(1.10) rotate(-6deg);
+        .moonlight-img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            display: block;
             filter: drop-shadow(0 2px 12px #b0e0ff);
+            background: none;
+            border-radius: 8px;
+        }
+        .moonlight-greatsword-header:hover .moonlight-img {
+            transform: scale(1.10) rotate(-6deg);
+            filter: drop-shadow(0 4px 18px #b0e0ff);
         }
         .moonlight-dropdown {
             display: none;
@@ -277,6 +288,10 @@
                 min-width: 120px;
                 font-size: 0.95em;
             }
+            .moonlight-img {
+                width: 40px;
+                height: 40px;
+            }
         }
     </style>
     <script>
@@ -351,20 +366,7 @@
     </div>
     <div id="page2" class="page-section" style="position:relative;">
         <div class="moonlight-greatsword-header" id="moonlightSword" title="Moonlight Greatsword" onclick="toggleMoonlightDropdown(event)">
-            <svg width="54" height="54" viewBox="0 0 54 54" fill="none">
-                <rect x="25" y="7" width="4" height="30" rx="2" fill="url(#bladeGradient)" stroke="#3ec6ff" stroke-width="1.5"/>
-                <path d="M19 36 Q27 44 35 36" stroke="#b0e0ff" stroke-width="3.5" fill="none"/>
-                <path d="M19 36 Q27 41 35 36" stroke="#3ec6ff" stroke-width="2" fill="none"/>
-                <rect x="23" y="37" width="8" height="4" rx="2" fill="#444" stroke="#232323" stroke-width="1"/>
-                <circle cx="27" cy="46" r="3" fill="#b0e0ff" stroke="#3ec6ff" stroke-width="1"/>
-                <defs>
-                    <linearGradient id="bladeGradient" x1="27" y1="7" x2="27" y2="37" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#b0e0ff"/>
-                        <stop offset="0.5" stop-color="#3ec6ff"/>
-                        <stop offset="1" stop-color="#1e6fa7"/>
-                    </linearGradient>
-                </defs>
-            </svg>
+<img src="img/moonlight-greatsword.png" alt="Moonlight Greatsword" class="moonlight-img">
             <div class="moonlight-dropdown" id="moonlightDropdown">
                 <strong>Moonlight Greatsword</strong><br>
                 The Moonlight Greatsword is a legendary weapon that has appeared in nearly every FromSoftware game, known for its iconic glowing blade and powerful magic attacks. [Add more history here!]
