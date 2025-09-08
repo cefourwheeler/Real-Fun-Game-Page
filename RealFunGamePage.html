@@ -126,8 +126,8 @@
         }
         .moonlight-greatsword-header {
             position: absolute;
-            top: 18px;
-            right: 24px;
+            top: 58px;
+            right: 230px;
             z-index: 30;
             cursor: pointer;
             transition: transform 0.2s;
@@ -146,7 +146,7 @@
             border-radius: 8px;
         }
         .moonlight-greatsword-header:hover .moonlight-img {
-            transform: scale(1.10) rotate(-6deg);
+            transform: scale(1.10) rotate(6deg);
             filter: drop-shadow(0 4px 18px #b0e0ff);
         }
         .moonlight-dropdown {
@@ -299,7 +299,7 @@
         const pageHeaders = {
             home: "Welcome to my video game web page",
             page2: "Dark Souls 3",
-            page3: "Page 3",
+            page3: "Expedition 33",
             page4: "Page 4",
             page5: "Page 5"
         };
@@ -348,7 +348,7 @@
             <div class="dropdown-content">
                 <a onclick="showPage('home')">Home</a>
                 <a onclick="showPage('page2')">Dark Souls 3</a>
-                <a onclick="showPage('page3')">Page 3</a>
+                <a onclick="showPage('page3')">Expedition 33</a>
                 <a onclick="showPage('page4')">Page 4</a>
                 <a onclick="showPage('page5')">Page 5</a>
             </div>
@@ -361,15 +361,15 @@
             This webpage is about games I like. You can find multiple pages dedicated to different games with an essay style summary of the game and why I like it.
         </div>
         <div class="interactive-tag" onclick="alert('You found the secret tag! Try exploring the other pages for more surprises!')" style="margin-top:8px; display:inline-block; cursor:pointer; background:linear-gradient(90deg,#3ec6ff,#b0e0ff); color:#232323; font-weight:bold; border-radius:10px; padding:2px 8px; font-size:0.7em; box-shadow:0 1px 3px rgba(62,198,255,0.10); opacity:0.5; transition:opacity 0.2s,transform 0.2s; position:relative;">
-            <span role="img" aria-label="sparkle">✨</span>
+            <span role="img" aria-label="sparkle"> 🚪</span>
         </div>
     </div>
     <div id="page2" class="page-section" style="position:relative;">
         <div class="moonlight-greatsword-header" id="moonlightSword" title="Moonlight Greatsword" onclick="toggleMoonlightDropdown(event)">
-<img src="img/moonlight-greatsword.png" alt="Moonlight Greatsword" class="moonlight-img">
+<img src="img/ds3 moonlightgreatsword.png" alt="Moonlight Greatsword" class="moonlight-img">
             <div class="moonlight-dropdown" id="moonlightDropdown">
                 <strong>Moonlight Greatsword</strong><br>
-                The Moonlight Greatsword is a legendary weapon that has appeared in nearly every FromSoftware game, known for its iconic glowing blade and powerful magic attacks. [Add more history here!]
+                The Moonlight Greatsword is the most iconic weapon in the Souls series. Despite its most known appearces are in the souls series, it's first appearance was acually in From Softwares first game 'King's Field'. It is usually a very strong weapon and has differnet looks and abilites in differnet games. My personal favorite dipiction of the weapon was in Bloodbourne.
             </div>
         </div>
         <div class="image-placeholder">
